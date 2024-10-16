@@ -10,7 +10,7 @@ label_mapping:
 batch_size: 32
 learning_rate: 0.001
 epochs: 10
-model_output: "posture_detection/models/posture_detection_model.pth"
+model_output: "posture_detection/models/trained_models/posture_detection_model.pth"
 
 test_squat_annotations: "posture_detection/datasets/Squat_Classification-4/test/_annotations.coco.json"
 test_squat_img_dir: "posture_detection/datasets/Squat_Classification-4/test/"

@@ -2,6 +2,9 @@
 posture_detection/datasets/Squat_Classification-4/
 posture_detection/datasets/Dumbbell-Biceps-Curl-Detection-12/
 
+# Trained models (keep this updated with newer models)
+posture_detection/models/trained_models/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
