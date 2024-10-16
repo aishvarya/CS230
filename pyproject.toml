@@ -2,7 +2,11 @@
 name = "posture-detection"
 version = "0.1.0"
 description = "Posture Detection"
-authors = ["Aish"]
+authors = [
+    "Aish <aishvs@stanford.edu>",
+    "Piya <priladha@stanford.edu>",
+    "Kim <kanick@stanford.edu>"
+]
 readme = "README.md"
 packages = [
     { include = "posture_detection" },
