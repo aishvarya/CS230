@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "posture-detection"
+version = "0.1.0"
+description = "Posture Detection"
+authors = ["Aish"]
+readme = "README.md"
+packages = [
+    { include = "posture_detection" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+torch = "^2.4.1"
+torchvision = "^0.19.1"
+roboflow = "^1.1.48"
+pyyaml = "^6.0.2"
+tqdm = "^4.66.5"
+resnet-pytorch = "^0.2.0"
