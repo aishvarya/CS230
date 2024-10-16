@@ -14,6 +14,12 @@ TODO
 poetry install
 ```
 
+## Downloading the training data
+Set your roboflow API key in `posture_detection/datasets/fetch_datasets.py` before running the following
+```bash
+poetry run python posture_detection/datasets/fetch_datasets.py
+```
+
 ## Training the model
 ```bash
 poetry run python posture_detection/training/train.py
