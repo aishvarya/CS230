@@ -1,18 +1,6 @@
-squat_annotations: "posture_detection/datasets/Squat_Classification-4/train/_annotations.coco.json"
-squat_img_dir: "posture_detection/datasets/Squat_Classification-4/train/"
-curl_annotations: "posture_detection/datasets/Dumbbell-Biceps-Curl-Detection-12/train/_annotations.coco.json"
-curl_img_dir: "posture_detection/datasets/Dumbbell-Biceps-Curl-Detection-12/train/"
-label_mapping:
-  squat:
-    correct_label: 3
-  curl:
-    correct_label: 1
+train_dir: "posture_detection/datasets/pushup/train"
+test_dir: "posture_detection/datasets/pushup/test"
 batch_size: 32
 learning_rate: 0.001
 epochs: 10
 model_output: "posture_detection/models/trained_models/posture_detection_model.pth"
-
-test_squat_annotations: "posture_detection/datasets/Squat_Classification-4/test/_annotations.coco.json"
-test_squat_img_dir: "posture_detection/datasets/Squat_Classification-4/test/"
-test_curl_annotations: "posture_detection/datasets/Dumbbell-Biceps-Curl-Detection-12/test/_annotations.coco.json"
-test_curl_img_dir: "posture_detection/datasets/Dumbbell-Biceps-Curl-Detection-12/test/"

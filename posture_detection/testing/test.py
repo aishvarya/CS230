@@ -1,9 +1,10 @@
 import torch
-from torch.utils.data import DataLoader, ConcatDataset
+from torch.utils.data import DataLoader
 from torchvision import transforms
-from posture_detection.data_loader.coco_loader import CocoDataset
+from posture_detection.data_loader.data_loader import CustomPostureDataset
 from posture_detection.models.hybrid_cnn_with_attention import HybridCNNWithAttention
 import yaml
+import os
 import logging
 from tqdm import tqdm
 
@@ -16,7 +17,7 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-# Load config
+# Load configuration
 with open("posture_detection/training/config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
@@ -26,42 +27,31 @@ transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-# Load test datasets
-test_squat_dataset = CocoDataset(
-    annotations_file=config['test_squat_annotations'],
-    img_dir=config['test_squat_img_dir'],
-    transform=transform,
-    exercise_type="squat",
-    label_mapping=config['label_mapping']
+# Load test dataset
+test_dataset = CustomPostureDataset(
+    annotations_file=os.path.join(config['test_dir'], "annotations.json"),
+    img_dir=config['test_dir'],
+    transform=transform
 )
 
-test_curl_dataset = CocoDataset(
-    annotations_file=config['test_curl_annotations'],
-    img_dir=config['test_curl_img_dir'],
-    transform=transform,
-    exercise_type="curl",
-    label_mapping=config['label_mapping']
-)
+test_loader = DataLoader(test_dataset, batch_size=config['batch_size'], shuffle=False)
 
-# Combine test datasets and create DataLoader
-test_combined_dataset = ConcatDataset([test_squat_dataset, test_curl_dataset])
-test_loader = DataLoader(test_combined_dataset, batch_size=config['batch_size'], shuffle=False)
-
-# Load the model
+# Initialize model
 model = HybridCNNWithAttention()
-model.load_state_dict(torch.load(config['model_output'], weights_only=True))
+model.load_state_dict(torch.load(config['model_output']))
 model.eval()
 
-_logger.info(f"Total number of test samples: {len(test_combined_dataset)}")
+_logger.info(f"Total number of test samples: {len(test_dataset)}")
 
+# Define evaluation function
 def evaluate_model(model, test_loader):
     correct = 0
     total = 0
     with torch.no_grad():
         for images, labels in tqdm(test_loader, desc="Evaluating"):
-            labels = labels.float().unsqueeze(1).squeeze(-1)
             outputs = model(images)
-            predicted = (outputs >= 0.5).float()  # Binary threshold at 0.5
+            predicted = (outputs >= 0.5).float().squeeze(1)  # Binary threshold at 0.5
+            _logger.info(f"Predicted: {predicted}")
             correct += (predicted == labels).sum().item()
             total += labels.size(0)
     accuracy = 100 * correct / total

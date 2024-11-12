@@ -4,7 +4,7 @@ from resnet_pytorch import ResNet
 
 
 class HybridCNNWithAttention(nn.Module):
-    def __init__(self, num_classes=1):
+    def __init__(self):
         super(HybridCNNWithAttention, self).__init__()
         self.cnn = ResNet.from_pretrained("resnet18")
         # Remove the last two layers of the ResNet model.
@@ -13,13 +13,13 @@ class HybridCNNWithAttention(nn.Module):
             nn.Conv2d(512, 256, kernel_size=1),
             nn.ReLU(),
             nn.Conv2d(256, 1, kernel_size=1),
-            nn.Sigmoid()
+            nn.Sigmoid(),
+            nn.BatchNorm2d(1),
         )
         self.fc = nn.Sequential(
             nn.Linear(512, 128),
             nn.ReLU(),
-            nn.Linear(128, num_classes),
-            nn.Sigmoid()
+            nn.Linear(128, 1)
         )
 
     def forward(self, x):
