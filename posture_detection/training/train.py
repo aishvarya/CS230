@@ -47,6 +47,8 @@ optimizer = optim.Adam(model.parameters(), lr=config['learning_rate'])
 for epoch in tqdm(range(config['epochs']), desc="Training"):
     model.train()
     running_loss = 0.0
+    correct_predictions = 0
+    total_predictions = 0
     for images, labels in train_loader:
         labels = labels.float().unsqueeze(1)  # (batch_size x 1)
         optimizer.zero_grad()
@@ -55,7 +57,13 @@ for epoch in tqdm(range(config['epochs']), desc="Training"):
         loss.backward()
         optimizer.step()
         running_loss += loss.item()
-    _logger.info(f"Epoch [{epoch+1}/{config['epochs']}], Loss: {running_loss/len(train_loader)}")
+        predictions = (outputs >= 0.5).float()
+        correct_predictions += (predictions == labels).sum().item()
+        total_predictions += labels.size(0)
+
+    epoch_loss = running_loss / len(train_loader)
+    epoch_accuracy = 100 * correct_predictions / total_predictions
+    _logger.info(f"Epoch [{epoch+1}/{config['epochs']}], Loss: {epoch_loss:.4f}, Accuracy: {epoch_accuracy:.2f}%")
 
 # Save the model
 torch.save(model.state_dict(), config['model_output'])

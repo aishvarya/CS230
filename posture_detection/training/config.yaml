@@ -1,6 +1,6 @@
 train_dir: "posture_detection/datasets/pushup/train"
 test_dir: "posture_detection/datasets/pushup/test"
 batch_size: 32
-learning_rate: 0.001
+learning_rate: 0.0001
 epochs: 10
 model_output: "posture_detection/models/trained_models/posture_detection_model.pth"
