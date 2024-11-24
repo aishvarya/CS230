@@ -25,4 +25,5 @@ class CustomPostureDataset(Dataset):
             image = self.transform(image)
 
         label = img_info['label']
-        return image, label
+        subclass = img_info['subclass']
+        return image, label, subclass

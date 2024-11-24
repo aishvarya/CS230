@@ -3,7 +3,7 @@ import cv2
 import json
 import random
 
-# using https://www.kaggle.com/datasets/mohamadashrafsalama/pushup dataset
+# Dataset directories
 correct_dir = '/Users/aishvaryasingh/Downloads/pushup/Correct sequence'
 incorrect_dir = '/Users/aishvaryasingh/Downloads/pushup/Wrong sequence'
 
@@ -17,7 +17,7 @@ test_annotations_path = os.path.join(output_test_dir, 'annotations.json')
 train_annotations = []
 test_annotations = []
 
-def extract_frames(video_path, label, label_name, frame_interval=10, start_count=0):
+def extract_frames(video_path, label, label_name, subclass=None, frame_interval=10, start_count=0):
     cap = cv2.VideoCapture(video_path)
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     frames_saved = 0
@@ -27,14 +27,16 @@ def extract_frames(video_path, label, label_name, frame_interval=10, start_count
         ret, frame = cap.read()
         if not ret:
             break
-        
+
         if i % frame_interval == 0:
-            frame_filename = f"{label_name}_frame_{start_count + frames_saved}.jpg"
-            
+            frame_filename = f"{label_name}_{subclass if subclass else ''}_frame_{start_count + frames_saved}.jpg"
+            frame_filename = frame_filename.strip('_')  # Remove trailing underscore if no subclass
+
             temp_annotations.append({
                 'file_name': frame_filename,
                 'frame': frame,
-                'label': label
+                'label': label,
+                'subclass': subclass if subclass else "none"
             })
             frames_saved += 1
 
@@ -45,21 +47,23 @@ def extract_frames(video_path, label, label_name, frame_interval=10, start_count
     split_index = int(len(temp_annotations) * 0.8)
     train_data = temp_annotations[:split_index]
     test_data = temp_annotations[split_index:]
-    
+
     for item in train_data:
         frame_path = os.path.join(output_train_dir, item['file_name'])
         cv2.imwrite(frame_path, item['frame'])
         train_annotations.append({
             'file_name': item['file_name'],
-            'label': item['label']
+            'label': item['label'],
+            'subclass': item['subclass']
         })
-    
+
     for item in test_data:
         frame_path = os.path.join(output_test_dir, item['file_name'])
         cv2.imwrite(frame_path, item['frame'])
         test_annotations.append({
             'file_name': item['file_name'],
-            'label': item['label']
+            'label': item['label'],
+            'subclass': item['subclass']
         })
 
 correct_frame_count = 0
@@ -74,10 +78,13 @@ for video_file in os.listdir(correct_dir):
 for video_file in os.listdir(incorrect_dir):
     video_path = os.path.join(incorrect_dir, video_file)
     if os.path.isfile(video_path) and video_file.endswith('.mp4'):
-        extract_frames(video_path, label=0, label_name="incorrect_pushup", frame_interval=10, start_count=incorrect_frame_count)
+        subclass = video_file.split('-')[1].split('.')[0] if '-' in video_file else "unknown"
+        extract_frames(video_path, label=0, label_name="incorrect_pushup", subclass=subclass, frame_interval=10, start_count=incorrect_frame_count)
         incorrect_frame_count += 1
 
 with open(train_annotations_path, 'w') as f:
     json.dump(train_annotations, f, indent=4)
 with open(test_annotations_path, 'w') as f:
     json.dump(test_annotations, f, indent=4)
+
+print("Frame extraction and annotation generation completed.")

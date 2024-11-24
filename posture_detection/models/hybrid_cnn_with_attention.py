@@ -2,9 +2,8 @@ import torch
 import torch.nn as nn
 from resnet_pytorch import ResNet
 
-
 class HybridCNNWithAttention(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes):
         super(HybridCNNWithAttention, self).__init__()
         self.cnn = ResNet.from_pretrained("resnet18")
         # Remove the last two layers of the ResNet model.
@@ -19,7 +18,7 @@ class HybridCNNWithAttention(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear(512, 128),
             nn.ReLU(),
-            nn.Linear(128, 1)
+            nn.Linear(128, num_classes)
         )
 
     def forward(self, x):
