@@ -44,15 +44,19 @@ This folder contains code for the development of a hybrid CNN model with attenti
 poetry install
 ```
 
-## Landmark images used in base model using media pipe
+## Landmark training images used in base model using media pipe
 mp_processing.py
 
 ## Training the model
 ```bash
 poetry run python mp/training/train.py
-
+```
 
 # Biomechanical logic for pushup posture correction
 
+## Landmark test images
+mp_processing.py
+
+## USe biomechanical logic to evaluate posture in test images
 posture_detection_with_MP_features/biomechanics.py
 
