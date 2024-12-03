@@ -44,14 +44,9 @@ This folder contains code for the development of a hybrid CNN model with attenti
 poetry install
 ```
 
-Assuming the dataset is already setup.
+## Landmark images used in base model using media pipe
+mp_processing.py
 
 ## Training the model
 ```bash
-poetry run python posture_detection/training/train.py
-```
-
-# Testing the model
-```bash
-poetry run python posture_detection/testing/test.py
-```
+poetry run python mp/training/train.py
