@@ -50,3 +50,9 @@ mp_processing.py
 ## Training the model
 ```bash
 poetry run python mp/training/train.py
+
+
+# Biomechanical logic for pushup posture correction
+
+posture_detection_with_MP_features/biomechanics.py
+
