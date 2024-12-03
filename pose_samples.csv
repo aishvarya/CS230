@@ -1,0 +1,11 @@
+sequence_id,frame,row_id,type,landmark_index,x,y,z,url_id,url,frame_start,frame_end,sequence_duration,source_id,source,l1_pose_id,l1_pose,l2_pose_id,l2_pose,l3_pose_id,l3_pose,collector_id,split
+2020,0,0-pose-0,pose,0,0.4138083755970001,-0.6056026220321655,-0.0621083490550518,5122,https://www.youtube.com/watch?v=wKKRT2Adl1c,21,22,1,1087,Almudena Yoga Life,1,standing,12,standing-forward-bend,110,downward-dog,3,test
+2021,0,0-pose-0,pose,0,-0.1875103265047073,-0.6651822328567505,-0.0783988684415817,1530,https://www.youtube.com/watch?v=5vIJX7SIiJo,94,98,4,1089,Alo Yoga,1,standing,12,standing-forward-bend,110,downward-dog,3,test
+2022,0,0-pose-0,pose,0,-0.6878677606582642,0.0311330035328865,-0.0625191032886505,3939,https://www.youtube.com/watch?v=nZC4qflcsgk,164,170,6,1089,Alo Yoga,1,standing,12,standing-forward-bend,110,downward-dog,3,train
+2023,0,0-pose-0,pose,0,-0.062609851360321,-0.6755461096763611,-0.2781469225883484,2488,https://www.youtube.com/watch?v=eB638Jc4vbs,587,590,3,1150,ArjunaÏöîÍ∞ÄÎ∞îÏú†,1,standing,12,standing-forward-bend,110,downward-dog,3,train
+2024,0,0-pose-0,pose,0,-0.6787766218185425,-0.2181281745433807,-0.0626470446586608,2943,https://www.youtube.com/watch?v=HelFdy8B4X4,86,93,7,1168,Ashtanga Nurse,1,standing,12,standing-forward-bend,110,downward-dog,3,train
+1268,0,0-pose-0,pose,0,-0.0525189228355884,-0.6264114379882812,-0.1340584903955459,1326,https://www.youtube.com/watch?v=2z4CRvBy7AA,624,653,29,1020,A Tutto Yoga,1,standing,11,standing-straight,104,tree,1,test
+1269,0,0-pose-0,pose,0,0.0031155105680227,-0.6646919250488281,-0.1637532413005828,1094,https://www.youtube.com/watch?v=-IMjjr7WaNI,3,30,27,1067,Aisha Dance Academy,1,standing,11,standing-straight,104,tree,1,train
+1270,0,0-pose-0,pose,0,-0.0091821365058422,-0.6113937497138977,-0.3215549886226654,2719,https://www.youtube.com/watch?v=Fr5kiIygm0c,10,38,28,1088,Alo Moves - Online Yoga & Fitness Videos,1,standing,11,standing-straight,104,tree,1,train
+1271,0,0-pose-0,pose,0,-0.0245850421488285,-0.6341997981071472,-0.2504853308200836,4218,https://www.youtube.com/watch?v=PZ1zAvcKzrg,13,42,29,1247,Bharti Yoga,1,standing,11,standing-straight,104,tree,1,train
+1272,0,0-pose-0,pose,0,-0.0448287427425384,-0.6124818921089172,-0.2973223626613617,4598,https://www.youtube.com/watch?v=SSVFynQLXG0,28,40,12,1299,CanalBienestar,1,standing,11,standing-straight,104,tree,1,train
